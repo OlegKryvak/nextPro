@@ -47,25 +47,25 @@ interface PostNextPageContext extends NextPageContext {
   }
 }
 
-// Post.getInitialProps = async ({ query, req }: PostNextPageContext) => {
-//   if (!req) {
-//     return {post: null}
-//   }
-
-//   const response = await fetch(`${process.env.API_URL}/posts/${query.id}`)
-//   const post: MyPost = await response.json()
-
-//   return {
-//     post
-//   }
-// }
-
-export async function getServerSideProps({ query, req }) {
+Post.getInitialProps = async ({ query, req }: PostNextPageContext) => {
   if (!req) {
     return {post: null}
   }
-  const response = await fetch(`http://localhost:4300/posts/${query.id}`)
-  const post = await response.json()
 
-  return {props: {post}}
+  const response = await fetch(`${process.env.API_URL}/posts/${query.id}`)
+  const post: MyPost = await response.json()
+
+  return {
+    post
+  }
 }
+
+// export async function getServerSideProps({ query, req }) {
+//   if (!req) {
+//     return {post: null}
+//   }
+//   const response = await fetch(`http://localhost:4300/posts/${query.id}`)
+//   const post = await response.json()
+
+//   return {props: {post}}
+// }
